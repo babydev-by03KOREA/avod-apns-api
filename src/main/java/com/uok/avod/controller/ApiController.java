@@ -3,6 +3,7 @@ package com.uok.avod.controller;
 import com.uok.avod.service.ApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,11 @@ public class ApiController {
 
     ApiController(ApiService apiService) {
         this.apiService = apiService;
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<String> hello() {
+        return ResponseEntity.ok("eroom 배포 자동화 테스트");
     }
 
     @PostMapping("/token")
