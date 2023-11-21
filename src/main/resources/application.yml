@@ -1,0 +1,5 @@
+spring:
+  redis:
+    host: 3.38.11.251
+    port: 6379
+    password: uokavodb747
