@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RestController("api")
+@RestController()
 @Slf4j
 public class ApiController {
     private ApiService apiService;
@@ -21,7 +21,8 @@ public class ApiController {
 
     @GetMapping("/")
     public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("eroom 배포 자동화 테스트");
+        log.info("[GET] / Approach");
+        return ResponseEntity.ok("Get /api Approach!");
     }
 
     @PostMapping("/token")
