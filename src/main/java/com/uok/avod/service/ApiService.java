@@ -1,9 +1,6 @@
 package com.uok.avod.service;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.firebase.messaging.Message;
-import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -46,8 +43,19 @@ public class ApiService {
 
             for (String token : tokenList) {
                 log.info("tokens " + token);
+                ApnsConfig apnsConfig = ApnsConfig.builder()
+                        .setAps(Aps.builder()
+                                .setAlert(ApsAlert.builder()
+                                        .setTitle(title)
+                                        .setBody(body)
+                                        .build())
+                                .setSound("default") // 기본 사운드 설정
+                                .build())
+                        .build();
+
                 Message message = Message.builder()
                         .setToken(token)
+                        .setApnsConfig(apnsConfig)
                         .setNotification(notification)
                         .build();
 
