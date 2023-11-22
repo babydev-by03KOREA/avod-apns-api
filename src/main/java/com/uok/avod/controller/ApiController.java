@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController()
@@ -26,14 +27,20 @@ public class ApiController {
     }
 
     @PostMapping("/token")
-    public ResponseEntity<String> addOrUpdateApnsToken() {
-        log.info("[POST] /token Approach");
+    public ResponseEntity<String> addOrUpdateApnsToken(@RequestBody Map<String, Object> payload) {
+        log.info("[POST] /token Approach " + payload);
+
+        String token = (String) payload.get("token");
+        apiService.addApnsToken(token);
+
         return ResponseEntity.ok("Add or Update Apns Token");
     }
 
     @PostMapping("/sendNotification")
     public ResponseEntity<String> sendNotification(@RequestBody Map<String, Object> payload) {
         log.info("[POST] /sendNotification Approach & param " + payload);
+
+        apiService.sendNotificationByAllUsers(payload.get("message").toString());
 
         return ResponseEntity.ok("Notification sent");
     }
