@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -32,7 +33,13 @@ public class ApiService {
 
     // 토큰 소유 모든 유저에게 알림송신
     public void sendNotificationByAllUsers(String body) {
-        String title = "승객으로부터 요청이 도착했어요!";
+        Random random = new Random();
+
+        // 'A'~'K', ASCII
+        char seatRow = (char) ('A' + random.nextInt(11));
+        int seatNumber = 1 + random.nextInt(64);
+
+        String title = seatNumber + String.valueOf(seatRow) + " 좌석으로부터 요청이 도착했어요!";
         List<String> tokenList = this.getAllApnsTokens();
 
         if (tokenList != null) {
