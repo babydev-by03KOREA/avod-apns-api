@@ -5,8 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -28,7 +27,13 @@ public class ApiService {
 
     // 모든 APNs 토큰을 조회
     public List<String> getAllApnsTokens() {
-        return redisTemplate.opsForList().range("apnsTokens", 0, -1);
+        List<String> tokens = redisTemplate.opsForList().range("apnsTokens", 0, -1);
+
+	// 중복 제거를 위한 Set 생성
+	Set<String> uniqueTokens = new HashSet<>(tokens);
+
+   	// 리스트를 비우고 중복 제거된 토큰으로 다시 채움
+   	return new ArrayList<>(uniqueTokens);
     }
 
     // 토큰 소유 모든 유저에게 알림송신
