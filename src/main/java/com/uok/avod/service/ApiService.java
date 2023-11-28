@@ -56,7 +56,7 @@ public class ApiService {
                                         .setTitle(title)
                                         .setBody(body)
                                         .build())
-                                .setSound("call-ca-beep.mp3")
+                                .setSound("call-ca-beep.wav")
                                 .build()).build();
 
                 Message message = Message.builder()
