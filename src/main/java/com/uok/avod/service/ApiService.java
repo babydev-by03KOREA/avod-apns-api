@@ -56,9 +56,8 @@ public class ApiService {
                                         .setTitle(title)
                                         .setBody(body)
                                         .build())
-                                .setSound("default") // 기본 사운드 설정
-                                .build())
-                        .build();
+                                .setSound("call-ca-beep.mp3")
+                                .build()).build();
 
                 Message message = Message.builder()
                         .setToken(token)
